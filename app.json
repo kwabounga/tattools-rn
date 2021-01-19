@@ -1,14 +1,19 @@
 {
+  "name": "Tattools",
+  "displayName": "Tattools 3D",
   "expo": {
-    "name": "tattools-rn",
-    "slug": "tattools-rn",
+    "name": "Tattools",
+    "icon": "assets/icon_n_white.png",
+    "slug": "expo-template-bare",
+    "privacy": "unlisted",
+    "sdkVersion": "34.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+    "ios": {
+      "bundleIdentifier": "com.kwa.tattools"
+    },
+    "android": {
+      "package": "com.kwa.tattools"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -16,17 +21,6 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }
