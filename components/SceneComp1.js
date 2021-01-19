@@ -12,7 +12,7 @@ import "@babylonjs/core/Meshes/meshBuilder";
 import '@babylonjs/core/Materials/standardMaterial';
 
 import SceneTemplate from '../SceneTemplate';
-
+import { VerticalBarButton } from './Ui';
 class SceneComp1 extends React.Component {
   onInitScene = async (scene) => {
     // This creates and positions an arcRotate camera
@@ -59,12 +59,12 @@ const styles = StyleSheet.create({
     flex: 1,  
     padding: 0
   },
-  // nav: {
-  //   position: 'absolute',
-  //   left: 0,
-  //   top: 0,
-  //   zIndex: 10,
-  // }
+  nav: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    zIndex: 10,
+  }
 });  
 
 export default SceneComp1;

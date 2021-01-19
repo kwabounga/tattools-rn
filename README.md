@@ -29,7 +29,7 @@ if your version of node is upper 12.9
 you will have this issue 
 https://github.com/expo/expo-cli/issues/1074
 
-so downgrade to version 12.9  or change 
+so downgrade to version 12.9  or directly change 
 
 ```js 
 var sharedBlacklist = [
