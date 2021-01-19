@@ -1,7 +1,6 @@
-# Babylonjs &amp; ReactNative(Expo)
-Simple app using ReactNative and BabylonJS 
+# Tattools 3D
+Personal app using ReactNative and BabylonJS 
 
-Showcase - https://imgur.com/a/idgbQEG
 
 ## Getting Started
 
@@ -14,7 +13,7 @@ Showcase - https://imgur.com/a/idgbQEG
 - Clone this repo.
 - npm install
 - npm run android - for android
-- npm run ios - for ios
+- npm run ios - for ios // no test yet
 
 *if Metro Bundler didn't start automaticaly, run 
 
@@ -22,15 +21,5 @@ Showcase - https://imgur.com/a/idgbQEG
 
 after npm install
 
-## What we have till now:
-
-- support basic shapes
-- support all types of lights and cameras
-- support all types of materials
-- import images as textures (local or via url), supported extensions: png, jpg, dds
-- import animated 3d objects, support only glb files which do not contain images
-
-## TODO:
-
-- add fully suport of glb and gltf files
-- add VR/AR features
+### Credits 
+base is https://github.com/Bulisor/BabylonjsDemo
