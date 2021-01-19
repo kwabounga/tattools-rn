@@ -23,3 +23,31 @@ after npm install
 
 ### Credits 
 base is https://github.com/Bulisor/BabylonjsDemo
+
+### Warning 
+if your version of node is upper 12.9
+you will have this issue 
+https://github.com/expo/expo-cli/issues/1074
+
+so downgrade to version 12.9  or change 
+
+```js 
+var sharedBlacklist = [
+  /node_modules[/\\]react[/\\]dist[/\\].*/,
+  /website\/node_modules\/.*/,
+  /heapCapture\/bundle\.js/,
+  /.*\/__tests__\/.*/
+];
+```  
+to:
+
+```js
+var sharedBlacklist = [
+  /node_modules[\/\\]react[\/\\]dist[\/\\].*/,
+  /website\/node_modules\/.*/,
+  /heapCapture\/bundle\.js/,
+  /.*\/__tests__\/.*/
+];
+```
+in `\node_modules\metro-config\src\defaults\blacklist.js`
+see https://stackoverflow.com/questions/58120990/how-to-resolve-the-error-on-react-native-start
