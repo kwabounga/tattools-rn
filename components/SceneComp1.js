@@ -13,7 +13,7 @@ import '@babylonjs/core/Materials/standardMaterial';
 
 import SceneTemplate from '../SceneTemplate';
 import { VerticalBarButton } from './Ui';
-class SceneComp1 extends React.Component {
+export class SceneComp1 extends React.Component {
   onInitScene = async (scene) => {
     // This creates and positions an arcRotate camera
     const camera = new ArcRotateCamera("ArcRotateCamera", 2, 1.45, 10, new Vector3(0, 0, 0), scene);
@@ -67,4 +67,8 @@ const styles = StyleSheet.create({
   }
 });  
 
-export default SceneComp1;
+// export default SceneComp1;
+
+export function action() {
+  console.log('the fucking action')
+}

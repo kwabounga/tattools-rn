@@ -16,14 +16,14 @@ export class VerticalBarButton extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        {this.allBtNames.map((name, id) => {
+      <View style={[styles.container, (this.props.position=='left'?styles.isLeft:styles.isRight)]}>
+        {Object.keys(this.props.actions).map((name, id) => {
           console.log(name);
           return (
             <TouchableOpacity
               style={styles.button}
-              key={id}
-              onPress={() => alert(`click on ${name}!`)}>
+              key={name + id}
+              onPress={() => this.props.actions[name]()}>
               <Text style={styles.textButton}>{name}</Text>
             </TouchableOpacity>
           );
@@ -36,9 +36,14 @@ export class VerticalBarButton extends React.Component {
 const styles = StyleSheet.create({
   container: {
     padding: 0,
-    position: "absolute",
-    right: 0,
+    position: "absolute",    
     top: 0,
+  },
+  isLeft:{
+    left: 0,
+  },
+  isRight:{
+    right: 0,
   },
   button: {
     width: 50,
