@@ -3,7 +3,12 @@
   "displayName": "Tattools 3D",
   "expo": {
     "name": "Tattools",
-    "icon": "assets/icon_n_white.png",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splashscreen.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#6d6d6d"
+    },
     "slug": "expo-template-bare",
     "privacy": "unlisted",
     "sdkVersion": "34.0.0",
@@ -12,7 +17,7 @@
     "ios": {
       "bundleIdentifier": "com.kwa.tattools"
     },
-    "android": {
+    "android": {      
       "package": "com.kwa.tattools"
     },
     "updates": {

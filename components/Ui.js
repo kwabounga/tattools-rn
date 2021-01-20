@@ -1,12 +1,8 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-// export function Nav () {
-//     return (
-//         <View>
-//             <Text>Hello</Text>
-//         </View>
-//     )
-// }
+
+import Icon from 'react-native-vector-icons/FontAwesome';
+// const myIcon = <Icon name="rocket" size={30} color="#900" />;
 export class VerticalBarButton extends React.Component {
   constructor(props) {
     super(props);
@@ -24,7 +20,8 @@ export class VerticalBarButton extends React.Component {
               style={styles.button}
               key={name + id}
               onPress={() => this.props.actions[name]()}>
-              <Text style={styles.textButton}>{name}</Text>
+              {/* <Text style={styles.textButton}>{name}</Text> */}
+              <Icon name={name} size={40} color={rawStyles.iconButton.color} />
             </TouchableOpacity>
           );
         })}
@@ -32,26 +29,31 @@ export class VerticalBarButton extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 0,
-    position: "absolute",    
-    top: 0,
-  },
-  isLeft:{
-    left: 0,
-  },
-  isRight:{
-    right: 0,
-  },
-  button: {
-    width: 50,
-    height: 50,
-    backgroundColor: "#B8860B",
-    padding: 3,
-  },
-  textButton: {
-    color: "#FFF",
-  },
-});
+const rawStyles = {
+    container: {
+      margin: 10,
+      position: "absolute",    
+      top: 0,
+    },
+    isLeft:{
+      left: 0,
+    },
+    isRight:{
+      right: 0,
+    },
+    button: {
+      width: 60,
+      height: 60,
+      backgroundColor: "#2E2E2E",
+      borderRadius: 10,
+      padding: 10,
+      marginBottom:3,
+    },
+    textButton: {
+      color: "#FFF",
+    },
+    iconButton: {
+      color: "#E3E3E3",
+    },
+  }
+const styles = StyleSheet.create(rawStyles);

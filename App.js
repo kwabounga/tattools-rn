@@ -30,19 +30,19 @@ export default class App extends React.Component {
   }
 }
 
-
+/* names of buttons ref icons name */
 const buttonsLeftActions = {
-  test: () => alert("click test"),
-  test2: () => alert("click test2"),
+  rocket: () => alert("click test"),
+  book: () => alert("click test2"),
 };
 
 
 const buttonsRightActions = {
-  but: () => {
+  tag: () => {
     alert("click test");
     action()
   },
-  but2: () => alert("click test2"),
+  camera: () => alert("click test2"),
 };
 
 

@@ -125,7 +125,7 @@ class SceneTemplate extends React.Component {
 }
 var width = Dimensions.get('window').width; // full mobile width
 var height = Dimensions.get('window').height; // full mobile height
-var sbHeight = StatusBar.currentHeight || 20; // statusbar height
+var sbHeight = StatusBar.currentHeight || 20; // statusbar height // 20 its for web preview
 
 const styles = StyleSheet.create({  
     container: {  
