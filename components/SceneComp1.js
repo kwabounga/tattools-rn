@@ -12,7 +12,7 @@ import "@babylonjs/core/Meshes/meshBuilder";
 import '@babylonjs/core/Materials/standardMaterial';
 
 import SceneTemplate from '../SceneTemplate';
-import { VerticalBarButton } from './Ui';
+
 export class SceneComp1 extends React.Component {
   onInitScene = async (scene) => {
     // This creates and positions an arcRotate camera
