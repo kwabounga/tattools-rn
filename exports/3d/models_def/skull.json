@@ -1,0 +1,44 @@
+{
+   "id":"skull",
+   "name":"Tête de mort",
+   "thumb":"./img/mod_thumb/thumb_skull.png",
+   "texture":"./skull_nrml.jpg",
+   "path":"./scenes/",
+   "file":"skull2.babylon",
+   "position":{
+      "x":-0.0005,
+      "y":0.0025,
+      "z":-0.0002
+   },
+   "rotation":{
+      "x":0,
+      "y":0,
+      "z":0
+   },
+   "scale":{
+      "x":1,
+      "y":1,
+      "z":1
+   },
+   "bones":[
+      
+      {
+         "name":"Bone.001",
+         "rotation":{
+            "x":-1.13,
+            "y":0,
+            "z":0
+         },
+         "maxRotation":{
+            "x":-1.16,
+            "y":0.79,
+            "z":0.79
+         },
+         "minRotation":{
+            "x":-2.31,
+            "y":-0.79,
+            "z":-0.79
+         }
+      }
+   ]
+}

@@ -1,0 +1,24 @@
+{
+  "id":"bullet",
+  "name": "Balle",
+  "thumb": "./img/mod_thumb/thumb_bullet.png",
+  "texture":"./bullet_nrml.jpg",
+  "path": "./scenes/",
+  "file": "bullet.babylon",
+  "position": {
+    "x": -0.0005,
+    "y": 0.0025,
+    "z": -0.0002
+  },
+  "rotation": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "scale": {
+    "x": 1,
+    "y": 1,
+    "z": 1
+  },
+  "bones": []
+}

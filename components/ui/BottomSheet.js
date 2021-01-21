@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Animated, StyleSheet, Text, View, Dimensions } from 'react-native';
+import { Animated, StyleSheet, Text, View, Dimensions,StatusBar } from 'react-native';
 import {
   PanGestureHandler,
   NativeViewGestureHandler,
@@ -8,12 +8,10 @@ import {
 } from 'react-native-gesture-handler';
 
 
-import { USE_NATIVE_DRIVER } from '../../commons/config';
-
-const HEADER_HEIGHT = 50;
+import { USE_NATIVE_DRIVER } from '../../exports/config';
+let HEADER_HEIGHT;
+let  SNAP_POINTS_FROM_TOP;
 const windowHeight = Dimensions.get('window').height;
-const SNAP_POINTS_FROM_TOP = [50, windowHeight * 0.4, windowHeight * 0.8];
-
 export class BottomSheet extends Component {
   masterdrawer = React.createRef();
   drawer = React.createRef();
@@ -21,6 +19,9 @@ export class BottomSheet extends Component {
   scroll = React.createRef();
   constructor(props) {
     super(props);
+    
+    HEADER_HEIGHT = this.props.height;
+    SNAP_POINTS_FROM_TOP = [0, windowHeight * 0.4, windowHeight - (HEADER_HEIGHT + (StatusBar.currentHeight||20))];
     const START = SNAP_POINTS_FROM_TOP[0];
     const END = SNAP_POINTS_FROM_TOP[SNAP_POINTS_FROM_TOP.length - 1];
 
@@ -107,6 +108,7 @@ export class BottomSheet extends Component {
               StyleSheet.absoluteFillObject,
               {
                 transform: [{ translateY: this._translateY }],
+                backgroundColor: "#323232",
               },
             ]}>
             <PanGestureHandler
@@ -115,7 +117,7 @@ export class BottomSheet extends Component {
               shouldCancelWhenOutside={false}
               onGestureEvent={this._onGestureEvent}
               onHandlerStateChange={this._onHeaderHandlerStateChange}>
-              <Animated.View style={styles.header} />
+              <Animated.View style={{ height:this.props.height, backgroundColor: this.props.backgroundColor, }} />
             </PanGestureHandler>
             <PanGestureHandler
               ref={this.drawer}
@@ -147,23 +149,22 @@ export class BottomSheet extends Component {
     );
   }
 }
-
-export default class Example extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <BottomSheet />
-      </View>
-    );
-  }
-}
+BottomSheet.defaultProps = {
+  height: 30,
+  backgroundColor: "red"
+};
+// export default class Example extends Component {
+//   render() {
+//     return (
+//       <View style={styles.container}>
+//         <BottomSheet />
+//       </View>
+//     );
+//   }
+// }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  header: {
-    height: HEADER_HEIGHT,
-    backgroundColor: 'red',
   },
 });

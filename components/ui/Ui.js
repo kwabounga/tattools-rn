@@ -1,8 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet,Dimensions } from "react-native";
-
 import Icon from "react-native-vector-icons/FontAwesome";
-// const myIcon = <Icon name="rocket" size={30} color="#900" />;
 
 
 export class VerticalBarButton extends React.Component {
@@ -26,7 +24,6 @@ export class VerticalBarButton extends React.Component {
               style={styles.button}
               key={name + id}
               onPress={() => this.props.actions[name]()}>
-              {/* <Text style={styles.textButton}>{name}</Text> */}
               <Icon name={name} size={40} color={rawStyles.iconButton.color} />
             </TouchableOpacity>
           );
