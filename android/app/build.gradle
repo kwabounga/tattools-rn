@@ -141,6 +141,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-vector-icons')
     implementation project(':react-native-reanimated')
     implementation project(':react-native-gesture-handler')
     implementation fileTree(dir: "libs", include: ["*.jar"])
@@ -157,4 +158,7 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 // react-native-vector-icons
+project.ext.vectoricons = [
+    iconFontNames: [ 'FontAwesome.ttf'] // Name of the font files you want to copy
+]
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"

@@ -30,4 +30,6 @@ target 'TattoolsApp' do
   pod 'RNReanimated', :podspec => '../node_modules/react-native-reanimated/RNReanimated.podspec'
 
   use_unimodules!
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
 end

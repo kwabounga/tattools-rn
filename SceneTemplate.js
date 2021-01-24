@@ -68,7 +68,7 @@ class SceneTemplate extends React.Component {
 
     componentWillUnmount () {};
 
-    componentDidMount() {};
+    // componentDidMount() {};
 
     _onGLContextCreate = async gl => {
         // Get the gl context and associate a Babylon Engine to it.

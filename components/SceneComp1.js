@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { ArcRotateCamera } from "@babylonjs/core/Cameras/arcRotateCamera";
 import { HemisphericLight } from "@babylonjs/core/Lights/hemisphericLight";
 import { Vector3 } from "@babylonjs/core/Maths/math.vector";
+import { Color3 } from "@babylonjs/core/Maths/math.color";
 import { GridMaterial } from "@babylonjs/materials/grid/gridMaterial";
 
 import { Mesh } from "@babylonjs/core/Meshes/mesh";
@@ -12,9 +13,13 @@ import "@babylonjs/core/Meshes/meshBuilder";
 import '@babylonjs/core/Materials/standardMaterial';
 
 import SceneTemplate from '../SceneTemplate';
-
+const {cst} = require('../exports/const.js') 
+// const TattoolsEnv = require('../exports/tattools_scene');
 export class SceneComp1 extends React.Component {
   onInitScene = async (scene) => {
+
+    //color definition for the scene
+    scene.clearColor = new Color3(cst.colors.BACKGROUND.r, cst.colors.BACKGROUND.v, cst.colors.BACKGROUND.b)
     // This creates and positions an arcRotate camera
     const camera = new ArcRotateCamera("ArcRotateCamera", 2, 1.45, 10, new Vector3(0, 0, 0), scene);
     camera.upperBetaLimit = Math.PI / 2;

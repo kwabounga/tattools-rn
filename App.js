@@ -1,24 +1,42 @@
 import React from "react";
-import { VerticalBarButton, NavBar } from "./components/ui/Ui";
+import { VerticalBarButton, SquareButtonSwitch } from "./components/ui/Ui";
 import { BottomSheet } from "./components/ui/BottomSheet";
-import { StyleSheet, Image, Text, View, StatusBar, TouchableOpacity } from "react-native";
+import { TopSheet } from "./components/ui/TopSheet";
+import { StyleSheet, Image, Switch, View, StatusBar, TouchableOpacity } from "react-native";
 import { SceneComp1, action } from "./components/SceneComp1";
 import { LoremIpsum } from "./exports/common";
 // import SceneComp2 from './components/SceneComp2';
 import SceneComp3 from "./components/SceneComp3";
 
 import allModels from "./exports/3d/models";
-
+import SwitchableView from './components/customs/SwitchableView';
 console.log(allModels['knife'].thumb);
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isHidden: false,
+    };
+  }
   render() {
     return (
       <View style={styles.container}>
         <SceneComp1 name="Tattools project" />
         {/* <SceneComp2 name='PBR Material/Import textures' /> */}
         {/* <SceneComp3 name='Import 3d Object' /> */}
+        <SquareButtonSwitch 
+          onValueChange={value => this.setState({ isHidden: value })}
+          value={this.state.isHidden}
+          style={{position:"absolute",zIndex:2, bottom:StatusBar.currentHeight,right:10}}
+        />
+        {/* <Switch
+          onValueChange={value => this.setState({ isHidden: value })}
+          value={this.state.isHidden}
+          style={{position:'absolute',bottom:StatusBar.currentHeight,right:10}}
+        /> */}
+        <SwitchableView hide={this.state.isHidden} style={StyleSheet.absoluteFillObject}>
         <VerticalBarButton
-          style={styles.buttonsBar}
+          style={[styles.buttonsBar,{marginTop:(StatusBar.currentHeight + (Switch.currentHeight*2))}]}
           position="right"
           actions={buttonsRightActions}
         />
@@ -27,6 +45,11 @@ export default class App extends React.Component {
           position="left"
           actions={buttonsLeftActions}
         />
+        <TopSheet
+            height={StatusBar.currentHeight||20}
+            backgroundColor={"#696969"}>
+          <LoremIpsum words={200}/>
+        </TopSheet>
         <BottomSheet
           height={StatusBar.currentHeight||20}
           backgroundColor={"#696969"}>
@@ -62,6 +85,7 @@ export default class App extends React.Component {
             <View style={{margin:5, width: 80, height: 80, backgroundColor: "cadetblue"}}/>
           </View>
         </BottomSheet>
+        </SwitchableView>
       </View>
     );
   }
@@ -70,19 +94,24 @@ import { objKeysFromArray } from "./exports/tools";
 import fontAwesome from "./node_modules/react-native-vector-icons/glyphmaps/FontAwesome.json";
 const fontKeys = objKeysFromArray(fontAwesome);
 /* names of buttons ref icons name */
+// const buttonsLeftActions = {
+//   [fontKeys.download]: () => alert("click test"),
+//   [fontKeys.image]: () => alert("click image"),
+//   [fontKeys.save]: () => alert("click save"),
+//   [fontKeys["paint-brush"]]: () => alert("click paint-brush"),
+// };
 const buttonsLeftActions = {
-  [fontKeys.download]: () => alert("click test"),
-  [fontKeys.image]: () => alert("click image"),
-  [fontKeys.save]: () => alert("click save"),
-  [fontKeys["paint-brush"]]: () => alert("click paint-brush"),
+  [fontKeys['arrows']]: () => alert("click move"),
+  [fontKeys['arrows-alt']]: () => alert("click scale"),
+  [fontKeys['undo']]: () => alert("click rotate"),
 };
 
 const buttonsRightActions = {
   [fontKeys.trash]: () => {
-    alert("click test");
+    alert("click delete model");
     action();
   },
-  [fontKeys.cube]: () => alert("click test2"),
+  [fontKeys['low-vision']]: () => alert("click hide model"),
 };
 
 const styles = StyleSheet.create({

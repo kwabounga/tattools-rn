@@ -1,32 +1,42 @@
-import React, { Component } from 'react';
-import { Animated, StyleSheet, Text, View, Dimensions,StatusBar } from 'react-native';
+import React, { Component } from "react";
+import {
+  Animated,
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  StatusBar,
+} from "react-native";
 import {
   PanGestureHandler,
   NativeViewGestureHandler,
   State,
   TapGestureHandler,
-} from 'react-native-gesture-handler';
+} from "react-native-gesture-handler";
 
-
-import { USE_NATIVE_DRIVER } from '../../exports/config';
-let HEADER_HEIGHT;
-let  SNAP_POINTS_FROM_TOP;
-const windowHeight = Dimensions.get('window').height;
-export class BottomSheet extends Component {
+import { USE_NATIVE_DRIVER } from "../../exports/config";
+let FOOTER_HEIGHT;
+let SNAP_POINTS_FROM_TOP;
+const windowHeight = Dimensions.get("window").height;
+export class TopSheet extends Component {
   masterdrawer = React.createRef();
   drawer = React.createRef();
   drawerheader = React.createRef();
   scroll = React.createRef();
   constructor(props) {
     super(props);
-    
-    HEADER_HEIGHT = this.props.height||40;
-    SNAP_POINTS_FROM_TOP = [0, windowHeight * 0.4, windowHeight - (HEADER_HEIGHT + (StatusBar.currentHeight||20))];
+
+    FOOTER_HEIGHT = this.props.height;
+    SNAP_POINTS_FROM_TOP = [
+      -(windowHeight - StatusBar.currentHeight * 2),
+      -windowHeight * 0.4,
+      0,
+    ];
     const START = SNAP_POINTS_FROM_TOP[0];
     const END = SNAP_POINTS_FROM_TOP[SNAP_POINTS_FROM_TOP.length - 1];
 
     this.state = {
-      lastSnap: END,
+      lastSnap: START,
     };
 
     this._lastScrollYValue = 0;
@@ -50,14 +60,14 @@ export class BottomSheet extends Component {
       this._lastScrollY
     );
 
-    this._translateYOffset = new Animated.Value(END);
+    this._translateYOffset = new Animated.Value(START);
     this._translateY = Animated.add(
       this._translateYOffset,
       Animated.add(this._dragY, this._reverseLastScrollY)
     ).interpolate({
       inputRange: [START, END],
       outputRange: [START, END],
-      extrapolate: 'clamp',
+      extrapolate: "clamp",
     });
   }
   _onHeaderHandlerStateChange = ({ nativeEvent }) => {
@@ -102,23 +112,16 @@ export class BottomSheet extends Component {
         maxDurationMs={100000}
         ref={this.masterdrawer}
         maxDeltaY={this.state.lastSnap - SNAP_POINTS_FROM_TOP[0]}>
-        <View style={StyleSheet.absoluteFillObject} pointerEvents="box-none">
+        {/* <View style={StyleSheet.absoluteFillObject} pointerEvents="box-none"> */}
           <Animated.View
             style={[
               StyleSheet.absoluteFillObject,
               {
                 transform: [{ translateY: this._translateY }],
                 backgroundColor: "#323232",
+                flex: 1,
               },
             ]}>
-            <PanGestureHandler
-              ref={this.drawerheader}
-              simultaneousHandlers={[this.scroll, this.masterdrawer]}
-              shouldCancelWhenOutside={false}
-              onGestureEvent={this._onGestureEvent}
-              onHandlerStateChange={this._onHeaderHandlerStateChange}>
-              <Animated.View style={{ height:this.props.height, backgroundColor: this.props.backgroundColor, }} />
-            </PanGestureHandler>
             <PanGestureHandler
               ref={this.drawer}
               simultaneousHandlers={[this.scroll, this.masterdrawer]}
@@ -130,32 +133,60 @@ export class BottomSheet extends Component {
                   ref={this.scroll}
                   waitFor={this.masterdrawer}
                   simultaneousHandlers={this.drawer}>
-                  <Animated.ScrollView
+                  {/* <Animated.ScrollView
                     style={[
                       styles.scrollView,
-                      { marginBottom: SNAP_POINTS_FROM_TOP[0] },
+                      { marginBottom: windowHeight, flex: 1 },
                     ]}
                     bounces={false}
                     onScrollBeginDrag={this._onRegisterLastScroll}
-                    scrollEventThrottle={1}>
+                    scrollEventThrottle={1}> */}
                     {this.props.children}
-                  </Animated.ScrollView>
+                  {/* </Animated.ScrollView> */}
                 </NativeViewGestureHandler>
               </Animated.View>
             </PanGestureHandler>
+            <PanGestureHandler
+              ref={this.drawerheader}
+              simultaneousHandlers={[this.scroll, this.masterdrawer]}
+              shouldCancelWhenOutside={false}
+              onGestureEvent={this._onGestureEvent}
+              onHandlerStateChange={this._onHeaderHandlerStateChange}>
+              <Animated.View
+                style={{
+                  height: this.props.height,
+                  backgroundColor: this.props.backgroundColor,
+                }}
+              />
+            </PanGestureHandler>
           </Animated.View>
-        </View>
+        {/* </View> */}
       </TapGestureHandler>
     );
   }
 }
-BottomSheet.defaultProps = {
+TopSheet.defaultProps = {
   height: 30,
-  backgroundColor: "red"
+  backgroundColor: "red",
 };
+// export default class Example extends Component {
+//   render() {
+//     return (
+//       <View style={styles.container}>
+//         <TopSheet />
+//       </View>
+//     );
+//   }
+// }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  scrollView: {
+    flex: 1
+  },
 });
+
+// {...StyleSheet.absoluteFillObject, flex: 1,}
+// StyleSheet.absoluteFillObject
