@@ -2,10 +2,7 @@ import React from "react";
 import {
   StyleSheet,
   Text,
-  Switch,
   View,
-  StatusBar,
-  TouchableOpacity,
 } from "react-native";
 
 export class Badge extends React.Component {

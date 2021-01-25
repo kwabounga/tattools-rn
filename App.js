@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   VerticalBarButton,
   SquareButtonSwitch,
@@ -12,10 +12,8 @@ import {
   View,
   StatusBar,
   Dimensions,
-  Text,
 } from "react-native";
 /* customs */
-import { LoremIpsum } from "./exports/common";
 import { SceneComp1, action } from "./components/SceneComp1";
 import { Thumbnails } from "./components/ui/Thumbnails";
 import SwitchableView from "./components/customs/SwitchableView";
@@ -34,7 +32,7 @@ import fontAwesome from "./node_modules/react-native-vector-icons/glyphmaps/Font
 import { FileType } from "./components/Form/FileType";
 import { InfosModels } from "./components/ui/InfosModels";
 const fontKeys = objKeysFromArray(fontAwesome);
-
+import TattoolsFile from "./exports/singletons/TattoolsFile"
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -42,14 +40,20 @@ export default class App extends React.Component {
       isHidden: false,
       infoPanelIsHidden: true,
     };
+    
     Icon.loadFont();
   }
+  componentWillMount(){
+    TattoolsFile.instance.new();
+    
+  }
+  
   /* names of buttons ref icons name */
   // TODO: extract that
   buttonsNavActions = {
     [fontKeys.download]: () => alert("click test"),
     [fontKeys["file-image-o"]]: () => alert("click image"),
-    [fontKeys.save]: () => alert("click save"),
+    [fontKeys.save]: () => {alert("click save")},
   };
 
   buttonsLeftActions = {
@@ -63,10 +67,10 @@ export default class App extends React.Component {
       alert("click delete model");
       action();
     },
-    [fontKeys["info"]]: () => {
+    [fontKeys["cog"]]: () => {
       this.setState({ infoPanelIsHidden: !this.state.infoPanelIsHidden });
     },
-    [fontKeys["paint-brush"]]: () => alert("click paint-brush"),
+    [fontKeys["paint-brush"]]: () =>{ alert(TattoolsFile.instance.stringify())},
   };
   render() {
     return (

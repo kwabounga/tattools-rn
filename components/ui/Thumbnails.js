@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Switch, View, StatusBar, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
 import { cst } from "../../exports/const";
 export class Thumbnails extends React.Component {
   constructor(props) {

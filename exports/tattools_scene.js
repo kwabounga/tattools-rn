@@ -3,7 +3,7 @@ import { HighlightLayer } from "@babylonjs/core/Layers/highlightLayer";
 import { SceneLoader } from "@babylonjs/core/Loading/sceneLoader.js";
 import { StandardMaterial } from "@babylonjs/core/Materials/standardMaterial";
 import { Texture } from '@babylonjs/core/Materials/Textures/texture';
-import { StackPanel, Control, TextBlock, Line, ImageBasedSlider,ColorPicker,Image } from '@babylonjs/gui';
+import { StackPanel, Control, TextBlock, Line, ImageBasedSlider,ColorPicker,Image,AdvancedDynamicTexture } from '@babylonjs/gui';
 import { Vector3 } from "@babylonjs/core/Maths/math.vector";
 import { Space } from "@babylonjs/core/Maths/math.axis";
 
@@ -64,7 +64,7 @@ TattoolsEnv.prototype.initEnv = function(scene, engine, camera, dimensions) {
 
   // creation de l'ui FG
   if (t._advancedTexture === null) {
-    t._advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+    t._advancedTexture = AdvancedDynamicTexture.CreateFullscreenUI("UI");
   }
 
   return this

@@ -1,65 +1,27 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   View,
   Text,
-  TouchableWithoutFeedback,
-  TextInput,
   Dimensions,
   StyleSheet,
   StatusBar,
   Keyboard,
 } from "react-native";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView } from "react-native-gesture-handler";
 import { TattoolsTextInput } from "../customs/TattoolsTextInput";
 const windowHeight = Dimensions.get("window").height;
 
 import { getRandomColor } from "../../exports/tools";
 import { cst } from "../../exports/const";
 import { local } from "../../exports/texts";
+const localText = local();
 
 import { Badge } from "../ui/Badge";
-const localText = local();
-// import ImagePicker from 'react-native-image-picker';
 export class FileType extends React.Component {
   constructor(props) {
     super(props);
   }
-  //   chooseImage = () => {
-  //     let options = {
-  //       title: 'Select Image',
-  //       customButtons: [
-  //         { name: 'customOptionKey', title: 'Choose Photo from Custom Option' },
-  //       ],
-  //       storageOptions: {
-  //         skipBackup: true,
-  //         path: 'images',
-  //       },
-  //     };
-  //     ImagePicker.showImagePicker(options, (response) => {
-  //       console.log('Response = ', response);
 
-  //       if (response.didCancel) {
-  //         console.log('User cancelled image picker');
-  //       } else if (response.error) {
-  //         console.log('ImagePicker Error: ', response.error);
-  //       } else if (response.customButton) {
-  //         console.log('User tapped custom button: ', response.customButton);
-  //         alert(response.customButton);
-  //       } else {
-  //         const source = { uri: response.uri };
-
-  //         // You can also display the image using data:
-  //         // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-  //         // alert(JSON.stringify(response));s
-  //         console.log('response', JSON.stringify(response));
-  //         this.setState({
-  //           filePath: response,
-  //           fileData: response.data,
-  //           fileUri: response.uri
-  //         });
-  //       }
-  //     });
-  //   }
   render() {
     return (
       <View style={[this.props.style, styles.container]}>
@@ -74,7 +36,7 @@ export class FileType extends React.Component {
             onMomentumScrollBegin={() => {
               Keyboard.dismiss();
             }}>
-            {/* <TouchableOpacity onPress={this.chooseImage}>Choose</TouchableOpacity> */}
+            
             {[...Array(30)].map((x, i) => (
               <TattoolsTextInput
                 key={i}

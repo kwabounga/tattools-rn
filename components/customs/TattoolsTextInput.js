@@ -1,10 +1,6 @@
 import React from "react";
 import {
-  View,
-  Text,
-  TouchableOpacity,
   TextInput,
-  Dimensions,
   StyleSheet,
 } from "react-native";
 import { cst } from "../../exports/const";
