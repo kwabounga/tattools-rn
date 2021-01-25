@@ -21,7 +21,7 @@ export class BottomSheet extends Component {
     super(props);
     
     HEADER_HEIGHT = this.props.height||40;
-    SNAP_POINTS_FROM_TOP = [0, windowHeight * 0.4, windowHeight - (HEADER_HEIGHT + (StatusBar.currentHeight||20))];
+    SNAP_POINTS_FROM_TOP = [0, this.props.middleSnapPoint, windowHeight - (HEADER_HEIGHT + (StatusBar.currentHeight||20))];
     const START = SNAP_POINTS_FROM_TOP[0];
     const END = SNAP_POINTS_FROM_TOP[SNAP_POINTS_FROM_TOP.length - 1];
 
@@ -151,7 +151,8 @@ export class BottomSheet extends Component {
 }
 BottomSheet.defaultProps = {
   height: 30,
-  backgroundColor: "red"
+  backgroundColor: "red",
+  middleSnapPoint: windowHeight * 0.4
 };
 
 const styles = StyleSheet.create({

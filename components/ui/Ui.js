@@ -1,15 +1,17 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet,Dimensions } from "react-native";
+import { View, TouchableOpacity, StyleSheet,Dimensions } from "react-native";
+import { cst } from '../../exports/const';
 import Icon from "react-native-vector-icons/FontAwesome";
 export class SquareButton extends React.Component {
   constructor (props){
     super(props);
+    
   }
   
   render() {
     return (
       <TouchableOpacity
-        style={styles.button}
+        style={styles.buttons}
         key={this.props.btKey}
         onPress={() => this.props.btAction()}>
         <Icon name={this.props.iconName} size={this.props.iconSize} color={this.props.iconColor} />
@@ -68,7 +70,35 @@ export class VerticalBarButton extends React.Component {
               btKey={name + id}
               btAction={() => this.props.actions[name]()}
               iconName={name}
-              iconSize={40}
+              iconSize={cst.ui.sizes.ICON_SIZE}
+              iconColor={rawStyles.iconButton.color}/>
+          );
+        })}
+      </View>
+    );
+  }
+}
+export class HorizontalBarButton extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <View
+        style={[
+          styles.containerHorizontal,
+          this.props.position === "top" ? styles.isTop : styles.isBottom
+        ]}>
+        {Object.keys(this.props.actions).map((name, id) => {
+          console.log(name);
+          return (
+            <SquareButton
+              key={name + id}
+              btKey={name + id}
+              btAction={() => this.props.actions[name]()}
+              iconName={name}
+              iconSize={cst.ui.sizes.ICON_SIZE}
               iconColor={rawStyles.iconButton.color}/>
           );
         })}
@@ -79,11 +109,15 @@ export class VerticalBarButton extends React.Component {
 
 var width = Dimensions.get('window').width; // full mobile width
 var height = Dimensions.get('window').height // full mobile width
+
 const rawStyles = {
   container: {
     marginTop: 40,
+    marginBottom: 40,
     position: "absolute",
     top: 0,
+    bottom:0,
+    justifyContent: 'flex-start'
   },
   isLeft: {
     marginLeft: 10,
@@ -93,20 +127,33 @@ const rawStyles = {
     marginRight: 10,
     right: 0,
   },
+  containerHorizontal: {
+    flex:0,
+    flexDirection:'row',
+    left: 0,
+    marginLeft: 10,
+    marginRight: 100,
+  },
+  isTop: {
+    margin: 0,
+  },
+  isBottom: {
+    margin: 0
+  },
   button: {
-    width: 60,
-    height: 60,
-    backgroundColor: "#2E2E2E",
+    width: cst.ui.sizes.BUTTON_SIZE,
+    height: cst.ui.sizes.BUTTON_SIZE,
+    backgroundColor: cst.ui.colors.COLOR_MENU,
     borderRadius: 10,
     padding: 10,
-    marginBottom: 3,
+    margin: 3,
     alignItems:'center'
   },
   textButton: {
-    color: "#FFF",
+    color: cst.ui.colors.COLOR_TEXT,
   },
   iconButton: {
-    color: "#E3E3E3",
+    color: cst.ui.colors.COLOR_HIGHLIGHT,
   },
   navBar: {
     width:width,
@@ -117,7 +164,7 @@ const rawStyles = {
   },
   navElements:{
     padding:3,
-    backgroundColor: '#696969',
+    backgroundColor: cst.ui.colors.COLOR_SECONDARY,
     borderRadius:0
   },
   navFlex1: {

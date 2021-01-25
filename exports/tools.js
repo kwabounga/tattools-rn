@@ -157,3 +157,11 @@ export const htmlColors = {
   yellow: "#ffff00",
   yellowgreen: "#9acd32",
 };
+
+/**
+ * @returns a random color from htmlColors set 
+ */
+export const getRandomColor = () => {
+  let allColorValues = Object.keys(htmlColors);
+  return htmlColors[allColorValues[Math.floor(Math.random() * allColorValues.length)]];
+}

@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import {
   Animated,
   StyleSheet,
-  Text,
-  View,
   Dimensions,
   StatusBar,
 } from "react-native";
@@ -15,9 +13,12 @@ import {
 } from "react-native-gesture-handler";
 
 import { USE_NATIVE_DRIVER } from "../../exports/config";
+import { cst } from "../../exports/const";
+import { getRandomColor } from "../../exports/tools";
 let FOOTER_HEIGHT;
 let SNAP_POINTS_FROM_TOP;
 const windowHeight = Dimensions.get("window").height;
+
 export class TopSheet extends Component {
   masterdrawer = React.createRef();
   drawer = React.createRef();
@@ -28,8 +29,8 @@ export class TopSheet extends Component {
 
     FOOTER_HEIGHT = this.props.height;
     SNAP_POINTS_FROM_TOP = [
-      -(windowHeight - StatusBar.currentHeight * 2),
-      -windowHeight * 0.4,
+      -(windowHeight - (StatusBar.currentHeight || 20) * 2),
+      this.props.middleSnapPoint,
       0,
     ];
     const START = SNAP_POINTS_FROM_TOP[0];
@@ -113,53 +114,60 @@ export class TopSheet extends Component {
         ref={this.masterdrawer}
         maxDeltaY={this.state.lastSnap - SNAP_POINTS_FROM_TOP[0]}>
         {/* <View style={StyleSheet.absoluteFillObject} pointerEvents="box-none"> */}
-          <Animated.View
-            style={[
-              StyleSheet.absoluteFillObject,
-              {
-                transform: [{ translateY: this._translateY }],
-                backgroundColor: "#323232",
-                flex: 1,
-              },
-            ]}>
-            <PanGestureHandler
-              ref={this.drawer}
-              simultaneousHandlers={[this.scroll, this.masterdrawer]}
-              shouldCancelWhenOutside={false}
-              onGestureEvent={this._onGestureEvent}
-              onHandlerStateChange={this._onHandlerStateChange}>
-              <Animated.View style={styles.container}>
-                <NativeViewGestureHandler
-                  ref={this.scroll}
-                  waitFor={this.masterdrawer}
-                  simultaneousHandlers={this.drawer}>
-                  {/* <Animated.ScrollView
-                    style={[
-                      styles.scrollView,
-                      { marginBottom: windowHeight, flex: 1 },
-                    ]}
-                    bounces={false}
-                    onScrollBeginDrag={this._onRegisterLastScroll}
-                    scrollEventThrottle={1}> */}
-                    {this.props.children}
-                  {/* </Animated.ScrollView> */}
-                </NativeViewGestureHandler>
-              </Animated.View>
-            </PanGestureHandler>
-            <PanGestureHandler
-              ref={this.drawerheader}
-              simultaneousHandlers={[this.scroll, this.masterdrawer]}
-              shouldCancelWhenOutside={false}
-              onGestureEvent={this._onGestureEvent}
-              onHandlerStateChange={this._onHeaderHandlerStateChange}>
-              <Animated.View
-                style={{
-                  height: this.props.height,
-                  backgroundColor: this.props.backgroundColor,
-                }}
-              />
-            </PanGestureHandler>
-          </Animated.View>
+        <Animated.View
+          style={[
+            StyleSheet.absoluteFillObject,
+            {
+              transform: [{ translateY: this._translateY }],
+              backgroundColor: cst.ui.colors.COLOR_MENU_BACKGROUND,
+              flex: 1,
+            },
+          ]}>
+          <PanGestureHandler
+            ref={this.drawer}
+            simultaneousHandlers={[this.scroll, this.masterdrawer]}
+            shouldCancelWhenOutside={false}
+            onGestureEvent={this._onGestureEvent}
+            onHandlerStateChange={this._onHandlerStateChange}>
+            <Animated.View style={styles.container}>
+              <NativeViewGestureHandler
+                ref={this.scroll}
+                waitFor={this.masterdrawer}
+                simultaneousHandlers={this.drawer}>
+                <Animated.ScrollView
+                  style={[
+                    StyleSheet.absoluteFillObject,
+                    {
+                      flex: 1,
+                      flexDirection: "column-reverse",
+                      alignSelf: "stretch",
+                      backgroundColor:getRandomColor()
+                    },
+                  ]}
+                  bounces={false}
+                  onScrollBeginDrag={this._onRegisterLastScroll}
+                  scrollEventThrottle={1}
+                  keyboardShouldPersistTaps={"never"}
+        keyboardDismissMode={"on-drag"}>
+                  {this.props.children}
+                </Animated.ScrollView>
+              </NativeViewGestureHandler>
+            </Animated.View>
+          </PanGestureHandler>
+          <PanGestureHandler
+            ref={this.drawerheader}
+            simultaneousHandlers={[this.scroll, this.masterdrawer]}
+            shouldCancelWhenOutside={false}
+            onGestureEvent={this._onGestureEvent}
+            onHandlerStateChange={this._onHeaderHandlerStateChange}>
+            <Animated.View
+              style={{
+                height: this.props.height,
+                backgroundColor: this.props.backgroundColor,
+              }}
+            />
+          </PanGestureHandler>
+        </Animated.View>
         {/* </View> */}
       </TapGestureHandler>
     );
@@ -168,6 +176,7 @@ export class TopSheet extends Component {
 TopSheet.defaultProps = {
   height: 30,
   backgroundColor: "red",
+  middleSnapPoint: -windowHeight * 0.4,
 };
 // export default class Example extends Component {
 //   render() {
@@ -184,7 +193,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollView: {
-    flex: 1
+    flex: 1,
   },
 });
 
