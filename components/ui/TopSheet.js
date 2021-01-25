@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import {
-  Animated,
-  StyleSheet,
-  Dimensions,
-  StatusBar,
-} from "react-native";
+import { Animated, StyleSheet, Dimensions, StatusBar } from "react-native";
 import {
   PanGestureHandler,
   NativeViewGestureHandler,
@@ -141,14 +136,12 @@ export class TopSheet extends Component {
                       flex: 1,
                       flexDirection: "column-reverse",
                       alignSelf: "stretch",
-                      backgroundColor:getRandomColor()
+                      backgroundColor: "transparent",
                     },
                   ]}
                   bounces={false}
                   onScrollBeginDrag={this._onRegisterLastScroll}
-                  scrollEventThrottle={1}
-                  keyboardShouldPersistTaps={"never"}
-        keyboardDismissMode={"on-drag"}>
+                  scrollEventThrottle={1}>
                   {this.props.children}
                 </Animated.ScrollView>
               </NativeViewGestureHandler>

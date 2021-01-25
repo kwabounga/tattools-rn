@@ -11,7 +11,7 @@ export class SquareButton extends React.Component {
   render() {
     return (
       <TouchableOpacity
-        style={styles.buttons}
+        style={styles.button}
         key={this.props.btKey}
         onPress={() => this.props.btAction()}>
         <Icon name={this.props.iconName} size={this.props.iconSize} color={this.props.iconColor} />
@@ -40,7 +40,7 @@ export class SquareButtonSwitch extends React.Component {
           btKey={'switch'}
           btAction={() => this.switch()}
           iconName={this.props.value?'eye':'eye-slash'}
-          iconSize={40}
+          iconSize={cst.ui.sizes.ICON_SIZE}
           iconColor={rawStyles.iconButton.color}/>
       </View>
     )

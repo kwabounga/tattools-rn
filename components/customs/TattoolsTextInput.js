@@ -29,9 +29,10 @@ export const TattoolsTextInput = ({ placeHolder, action }) => {
 const styles = StyleSheet.create({
   textInput: {
     height: cst.ui.sizes.INPUT_TEXT_HEIGHT,
-    borderColor: cst.ui.colors.COLOR_SECONDARY,
+    borderColor: cst.ui.colors.COLOR_HIGHLIGHT,
     borderWidth: cst.ui.sizes.SMALL_BORDER,
     borderRadius: 5,
     margin:cst.ui.sizes.INPUT_TEXT_MARGIN,
+    backgroundColor:cst.ui.colors.COLOR_INPUT
   },
 });
